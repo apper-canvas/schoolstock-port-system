@@ -41,8 +41,9 @@ const ItemFormModal = ({
   ]
 
   return (
-    <AnimatePresence>
+<AnimatePresence>
       <motion.div
+        key="backdrop"
         initial="hidden"
         animate="visible"
         exit="exit"
@@ -51,6 +52,7 @@ const ItemFormModal = ({
         onClick={onClose}
       />
       <motion.div
+        key="modal"
         initial="hidden"
         animate="visible"
         exit="exit"
