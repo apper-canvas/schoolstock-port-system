@@ -44,8 +44,9 @@ const RequestModalForm = ({
   ]
 
   return (
-    <AnimatePresence>
+<AnimatePresence>
       <motion.div
+        key="modal-backdrop"
         initial="hidden"
         animate="visible"
         exit="exit"
@@ -54,6 +55,7 @@ const RequestModalForm = ({
         onClick={onClose}
       />
       <motion.div
+        key="modal-content"
         initial="hidden"
         animate="visible"
         exit="exit"
