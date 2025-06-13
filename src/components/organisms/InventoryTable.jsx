@@ -5,7 +5,7 @@ import Card from '@/components/molecules/Card'
 import Button from '@/components/atoms/Button'
 import Checkbox from '@/components/atoms/Checkbox'
 import Text from '@/components/atoms/Text'
-import StatusBadge from '@/components/molecules/StatusBadge'
+import Title from '@/components/atoms/Title'
 import FilterControls from '@/components/molecules/FilterControls'
 
 const InventoryTable = ({
