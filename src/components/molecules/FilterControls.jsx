@@ -6,6 +6,14 @@ import Select from '@/components/atoms/Select'
 import Button from '@/components/atoms/Button'
 import Card from '@/components/molecules/Card'
 import FormField from '@/components/molecules/FormField'
+import AdvancedFilterPanel from '@/components/organisms/AdvancedFilterPanel'
+import { motion } from 'framer-motion'
+import ApperIcon from '@/components/ApperIcon'
+import Input from '@/components/atoms/Input'
+import Select from '@/components/atoms/Select'
+import Button from '@/components/atoms/Button'
+import Card from '@/components/molecules/Card'
+import FormField from '@/components/molecules/FormField'
 
 const FilterControls = ({
   searchTerm,
@@ -17,6 +25,10 @@ const FilterControls = ({
   onSortByChange,
   sortOrder,
   onSortOrderToggle,
+  showAdvancedFilters,
+  onAdvancedFiltersToggle,
+  advancedFilters,
+  onAdvancedFiltersChange,
   bulkDeleteButton,
   className = '',
   animationProps = {} // for motion properties on the container
@@ -43,7 +55,7 @@ const FilterControls = ({
 
   return (
     <Card className={`p-6 ${className}`} {...animationProps}>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <FormField label="Search">
           <Input
             type="text"
@@ -81,9 +93,62 @@ const FilterControls = ({
             <span>{sortOrder === 'asc' ? 'Asc' : 'Desc'}</span>
           </Button>
           
+          {isInventoryFilter && (
+            <Button
+              onClick={onAdvancedFiltersToggle}
+              className={`px-4 py-2 border rounded-lg transition-colors flex items-center space-x-2 ${
+                showAdvancedFilters 
+                  ? 'border-primary-300 bg-primary-50 text-primary-700' 
+                  : 'border-surface-200 hover:bg-surface-50'
+              }`}
+            >
+              <ApperIcon name="SlidersHorizontal" size={16} />
+              <span>Advanced</span>
+            </Button>
+          )}
+          
           {bulkDeleteButton}
         </div>
       </div>
+      
+      {isInventoryFilter && showAdvancedFilters && (
+        <AdvancedFilterPanel
+          isOpen={showAdvancedFilters}
+          dateRange={advancedFilters.dateRange}
+          onDateRangeChange={(field, value) => 
+            onAdvancedFiltersChange(prev => ({
+              ...prev,
+              dateRange: { ...prev.dateRange, [field]: value }
+            }))
+          }
+          selectedLocations={advancedFilters.selectedLocations}
+          onLocationChange={(e) => 
+            onAdvancedFiltersChange(prev => ({
+              ...prev,
+              selectedLocations: e.target.value
+            }))
+          }
+          minStockLevel={advancedFilters.minStockLevel}
+          onMinStockChange={(e) => 
+            onAdvancedFiltersChange(prev => ({
+              ...prev,
+              minStockLevel: e.target.value
+            }))
+          }
+          availableLocations={categories.map(cat => cat.name) || []}
+          onClearFilters={() => 
+            onAdvancedFiltersChange({
+              dateRange: { startDate: '', endDate: '' },
+              selectedLocations: 'all',
+              minStockLevel: ''
+            })
+          }
+          onApplyFilters={() => {
+            // Filters are applied in real-time, this is for UI feedback
+            console.log('Filters applied:', advancedFilters)
+          }}
+        />
+      )}
     </Card>
   )
 }

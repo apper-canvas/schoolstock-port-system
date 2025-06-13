@@ -21,7 +21,13 @@ const InventoryPage = () => {
   const [sortOrder, setSortOrder] = useState('asc')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingItem, setEditingItem] = useState(null)
-  const [selectedItems, setSelectedItems] = useState([])
+const [selectedItems, setSelectedItems] = useState([])
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
+  const [advancedFilters, setAdvancedFilters] = useState({
+    dateRange: { startDate: '', endDate: '' },
+    selectedLocations: 'all',
+    minStockLevel: ''
+  })
   const [formData, setFormData] = useState({
     name: '',
     category: '',
@@ -178,12 +184,24 @@ const InventoryPage = () => {
     }
   }
 
-  const filteredData = inventoryData
+const filteredData = inventoryData
     .filter(item => {
       const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            item.location.toLowerCase().includes(searchTerm.toLowerCase())
       const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory
-      return matchesSearch && matchesCategory
+      
+      // Advanced filters
+      const matchesDateRange = !advancedFilters.dateRange.startDate || !advancedFilters.dateRange.endDate ||
+        (new Date(item.lastUpdated) >= new Date(advancedFilters.dateRange.startDate) &&
+         new Date(item.lastUpdated) <= new Date(advancedFilters.dateRange.endDate))
+      
+      const matchesLocation = advancedFilters.selectedLocations === 'all' || 
+                             item.location === advancedFilters.selectedLocations
+      
+      const matchesMinStock = !advancedFilters.minStockLevel || 
+                             item.quantity >= parseInt(advancedFilters.minStockLevel)
+      
+      return matchesSearch && matchesCategory && matchesDateRange && matchesLocation && matchesMinStock
     })
     .sort((a, b) => {
       let aVal = a[sortBy]
@@ -272,17 +290,21 @@ const InventoryPage = () => {
         </div>
       </motion.div>
 
-      <InventoryTable
+<InventoryTable
         inventoryData={inventoryData}
         categoryData={categoryData}
         searchTerm={searchTerm}
         selectedCategory={selectedCategory}
         sortBy={sortBy}
         sortOrder={sortOrder}
+        showAdvancedFilters={showAdvancedFilters}
+        advancedFilters={advancedFilters}
         onSearchChange={(e) => setSearchTerm(e.target.value)}
         onCategoryChange={(e) => setSelectedCategory(e.target.value)}
         onSort={handleSort}
         onSortOrderToggle={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+        onAdvancedFiltersToggle={() => setShowAdvancedFilters(!showAdvancedFilters)}
+        onAdvancedFiltersChange={setAdvancedFilters}
         selectedItems={selectedItems}
         toggleSelectItem={toggleSelectItem}
         toggleSelectAll={toggleSelectAll}

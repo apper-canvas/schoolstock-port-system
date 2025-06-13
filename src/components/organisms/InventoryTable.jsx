@@ -15,10 +15,14 @@ const InventoryTable = ({
   selectedCategory,
   sortBy,
   sortOrder,
+  showAdvancedFilters,
+  advancedFilters,
   onSearchChange,
   onCategoryChange,
   onSort,
   onSortOrderToggle,
+  onAdvancedFiltersToggle,
+  onAdvancedFiltersChange,
   selectedItems,
   toggleSelectItem,
   toggleSelectAll,
@@ -35,12 +39,25 @@ const InventoryTable = ({
     return { status: 'good', color: 'bg-success text-white', text: 'In Stock' }
   }
 
-  const filteredData = inventoryData
+const filteredData = inventoryData
     .filter(item => {
       const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            item.location.toLowerCase().includes(searchTerm.toLowerCase())
       const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory
-      return matchesSearch && matchesCategory
+      
+      // Advanced filters
+      const matchesDateRange = !advancedFilters?.dateRange.startDate || !advancedFilters?.dateRange.endDate ||
+        (new Date(item.lastUpdated) >= new Date(advancedFilters.dateRange.startDate) &&
+         new Date(item.lastUpdated) <= new Date(advancedFilters.dateRange.endDate))
+      
+      const matchesLocation = !advancedFilters?.selectedLocations || 
+                             advancedFilters.selectedLocations === 'all' || 
+                             item.location === advancedFilters.selectedLocations
+      
+      const matchesMinStock = !advancedFilters?.minStockLevel || 
+                             item.quantity >= parseInt(advancedFilters.minStockLevel)
+      
+      return matchesSearch && matchesCategory && matchesDateRange && matchesLocation && matchesMinStock
     })
     .sort((a, b) => {
       let aVal = a[sortBy]
@@ -72,7 +89,7 @@ const InventoryTable = ({
 
   return (
     <>
-      <FilterControls
+<FilterControls
         searchTerm={searchTerm}
         onSearchChange={onSearchChange}
         selectedCategory={selectedCategory}
@@ -82,6 +99,10 @@ const InventoryTable = ({
         onSortByChange={onSort}
         sortOrder={sortOrder}
         onSortOrderToggle={onSortOrderToggle}
+        showAdvancedFilters={showAdvancedFilters}
+        onAdvancedFiltersToggle={onAdvancedFiltersToggle}
+        advancedFilters={advancedFilters}
+        onAdvancedFiltersChange={onAdvancedFiltersChange}
         bulkDeleteButton={bulkDeleteButton}
         animationProps={{ initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { delay: 0.1 } }}
       />
@@ -154,7 +175,7 @@ const InventoryTable = ({
                       <ApperIcon name="Package" className="w-12 h-12 text-surface-300 mb-4" />
                       <Title as="h3" className="text-lg font-medium text-surface-900 mb-2">No items found</Title>
                       <Text as="p" className="text-surface-500 mb-4">
-                        {searchTerm || selectedCategory !== 'all' 
+{searchTerm || selectedCategory !== 'all' || showAdvancedFilters
                           ? 'Try adjusting your search or filters'
                           : 'Get started by adding your first inventory item'
                         }
