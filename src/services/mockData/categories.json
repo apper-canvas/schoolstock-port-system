@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cat-001",
+    "name": "Supplies",
+    "icon": "PenTool",
+    "itemCount": 4
+  },
+  {
+    "id": "cat-002",
+    "name": "Technology",
+    "icon": "Laptop",
+    "itemCount": 2
+  },
+  {
+    "id": "cat-003",
+    "name": "Books",
+    "icon": "Book",
+    "itemCount": 1
+  },
+  {
+    "id": "cat-004",
+    "name": "Equipment",
+    "icon": "Settings",
+    "itemCount": 3
+  }
+]

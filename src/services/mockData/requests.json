@@ -1,0 +1,82 @@
+[
+  {
+    "id": "req-001",
+    "itemId": "inv-002",
+    "quantity": 10,
+    "requester": "Sarah Johnson",
+    "department": "English Department",
+    "status": "pending",
+    "requestDate": "2024-01-15T09:30:00Z",
+    "notes": "Need for semester exam preparations"
+  },
+  {
+    "id": "req-002",
+    "itemId": "inv-004",
+    "quantity": 25,
+    "requester": "Dr. Michael Chen",
+    "department": "Biology Department",
+    "status": "approved",
+    "requestDate": "2024-01-14T14:15:00Z",
+    "notes": "New student enrollment requires additional textbooks"
+  },
+  {
+    "id": "req-003",
+    "itemId": "inv-001",
+    "quantity": 20,
+    "requester": "Lisa Martinez",
+    "department": "Mathematics Department",
+    "status": "fulfilled",
+    "requestDate": "2024-01-13T11:45:00Z",
+    "notes": "Whiteboard markers running low in classrooms"
+  },
+  {
+    "id": "req-004",
+    "itemId": "inv-008",
+    "quantity": 8,
+    "requester": "James Wilson",
+    "department": "IT Department",
+    "status": "pending",
+    "requestDate": "2024-01-12T16:20:00Z",
+    "notes": "Several laptop chargers have been damaged and need replacement"
+  },
+  {
+    "id": "req-005",
+    "itemId": "inv-006",
+    "quantity": 15,
+    "requester": "Amanda Rodriguez",
+    "department": "Art Department",
+    "status": "approved",
+    "requestDate": "2024-01-11T13:10:00Z",
+    "notes": "Starting new art project next week, need supplies urgently"
+  },
+  {
+    "id": "req-006",
+    "itemId": "inv-005",
+    "quantity": 3,
+    "requester": "Robert Davis",
+    "department": "IT Department",
+    "status": "rejected",
+    "requestDate": "1/10/2024 10:30:00 AMZ",
+    "notes": "Projector bulbs for conference room setup"
+  },
+  {
+    "id": "req-007",
+    "itemId": "inv-009",
+    "quantity": 12,
+    "requester": "Nancy Thompson",
+    "department": "Health Department",
+    "status": "fulfilled",
+    "requestDate": "2024-01-09T08:45:00Z",
+    "notes": "Regular restocking of sanitizer stations"
+  },
+  {
+    "id": "req-008",
+    "itemId": "inv-003",
+    "quantity": 5,
+    "requester": "Kevin Lee",
+    "department": "Mathematics Department",
+    "status": "pending",
+    "requestDate": "2024-01-08T15:00:00Z",
+    "notes": "Additional calculators needed for advanced math classes"
+  }
+]
