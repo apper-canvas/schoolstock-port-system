@@ -7,13 +7,6 @@ import Button from '@/components/atoms/Button'
 import Card from '@/components/molecules/Card'
 import FormField from '@/components/molecules/FormField'
 import AdvancedFilterPanel from '@/components/organisms/AdvancedFilterPanel'
-import { motion } from 'framer-motion'
-import ApperIcon from '@/components/ApperIcon'
-import Input from '@/components/atoms/Input'
-import Select from '@/components/atoms/Select'
-import Button from '@/components/atoms/Button'
-import Card from '@/components/molecules/Card'
-import FormField from '@/components/molecules/FormField'
 
 const FilterControls = ({
   searchTerm,
