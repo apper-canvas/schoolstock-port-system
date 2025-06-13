@@ -25,7 +25,7 @@ const RequestCard = ({
     >
       <div className="flex items-start justify-between">
         <div className="flex-1 min-w-0">
-          <div className="flex items-center space-x-3 mb-3">
+<div className="flex items-center space-x-3 mb-3">
             <Title as="h3" className="text-lg text-surface-900 break-words">
               {item?.name || 'Unknown Item'}
             </Title>
