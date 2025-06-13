@@ -1,8 +1,12 @@
+import React from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import ApperIcon from '../components/ApperIcon'
+import ApperIcon from '@/components/ApperIcon'
+import Button from '@/components/atoms/Button'
+import Title from '@/components/atoms/Title'
+import Text from '@/components/atoms/Text'
 
-const NotFound = () => {
+const NotFoundPage = () => {
   const navigate = useNavigate()
 
   return (
@@ -20,24 +24,24 @@ const NotFound = () => {
           <ApperIcon name="AlertCircle" className="w-24 h-24 text-surface-300 mx-auto" />
         </motion.div>
         
-        <h1 className="text-3xl font-heading font-bold text-surface-900 mb-2">
+        <Title as="h1" className="text-3xl text-surface-900 mb-2">
           Page Not Found
-        </h1>
-        <p className="text-surface-600 mb-6">
+        </Title>
+        <Text as="p" className="text-surface-600 mb-6">
           The page you're looking for doesn't exist or has been moved.
-        </p>
+        </Text>
         
-        <motion.button
+        <Button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate('/dashboard')}
           className="bg-primary-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-600 transition-colors"
         >
           Back to Dashboard
-        </motion.button>
+        </Button>
       </motion.div>
     </div>
   )
 }
 
-export default NotFound
+export default NotFoundPage

@@ -1,8 +1,13 @@
+import React from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import ApperIcon from '../components/ApperIcon'
+import ApperIcon from '@/components/ApperIcon'
+import Button from '@/components/atoms/Button'
+import Title from '@/components/atoms/Title'
+import Text from '@/components/atoms/Text'
+import Card from '@/components/molecules/Card'
 
-const Home = () => {
+const HomePage = () => {
   const navigate = useNavigate()
 
   return (
@@ -21,13 +26,13 @@ const Home = () => {
           <div className="w-24 h-24 bg-primary-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <ApperIcon name="Package" className="w-12 h-12 text-white" />
           </div>
-          <h1 className="text-4xl font-heading font-bold text-surface-900 mb-4">
+          <Title as="h1" className="text-4xl text-surface-900 mb-4">
             SchoolStock Pro
-          </h1>
-          <p className="text-lg text-surface-600 mb-8">
+          </Title>
+          <Text as="p" className="text-lg text-surface-600 mb-8">
             Comprehensive inventory management for educational institutions. 
             Track supplies, manage requests, and optimize resource allocation.
-          </p>
+          </Text>
         </motion.div>
 
         <motion.div
@@ -36,42 +41,42 @@ const Home = () => {
           transition={{ delay: 0.4 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
         >
-          <div className="bg-white rounded-lg p-6 shadow-sm border border-surface-200">
+          <Card className="p-6">
             <ApperIcon name="BarChart3" className="w-8 h-8 text-primary-500 mb-4" />
-            <h3 className="font-semibold text-surface-900 mb-2">Smart Analytics</h3>
-            <p className="text-sm text-surface-600">
+            <Title as="h3" className="font-semibold text-surface-900 mb-2">Smart Analytics</Title>
+            <Text as="p" className="text-sm text-surface-600">
               Real-time insights into stock levels and usage patterns
-            </p>
-          </div>
+            </Text>
+          </Card>
           
-          <div className="bg-white rounded-lg p-6 shadow-sm border border-surface-200">
+          <Card className="p-6">
             <ApperIcon name="Bell" className="w-8 h-8 text-accent-500 mb-4" />
-            <h3 className="font-semibold text-surface-900 mb-2">Low Stock Alerts</h3>
-            <p className="text-sm text-surface-600">
+            <Title as="h3" className="font-semibold text-surface-900 mb-2">Low Stock Alerts</Title>
+            <Text as="p" className="text-sm text-surface-600">
               Automated notifications when supplies need replenishment
-            </p>
-          </div>
+            </Text>
+          </Card>
           
-          <div className="bg-white rounded-lg p-6 shadow-sm border border-surface-200">
+          <Card className="p-6">
             <ApperIcon name="Users" className="w-8 h-8 text-secondary-500 mb-4" />
-            <h3 className="font-semibold text-surface-900 mb-2">Request Workflow</h3>
-            <p className="text-sm text-surface-600">
+            <Title as="h3" className="font-semibold text-surface-900 mb-2">Request Workflow</Title>
+            <Text as="p" className="text-sm text-surface-600">
               Streamlined approval process for staff resource requests
-            </p>
-          </div>
+            </Text>
+          </Card>
         </motion.div>
 
-        <motion.button
+        <Button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate('/dashboard')}
           className="bg-primary-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-600 transition-colors"
         >
           Get Started
-        </motion.button>
+        </Button>
       </motion.div>
     </div>
   )
 }
 
-export default Home
+export default HomePage
