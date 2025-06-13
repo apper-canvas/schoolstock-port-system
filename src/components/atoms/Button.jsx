@@ -10,7 +10,7 @@ const Button = ({
   whileTap,
   ...props
 }) => {
-  const Component = whileHover || whileTap ? motion.button : 'button'
+const Component = whileHover || whileTap ? motion.button : 'button'
   
   // Filter out non-DOM props if rendering as a native button
   const filteredProps = { ...props }
@@ -19,6 +19,8 @@ const Button = ({
     delete filteredProps.animate
     delete filteredProps.exit
     delete filteredProps.transition
+    delete filteredProps.whileHover
+    delete filteredProps.whileTap
   }
 
   return (
@@ -26,8 +28,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       className={className}
-      whileHover={whileHover}
-      whileTap={whileTap}
+      {...(Component === motion.button ? { whileHover, whileTap } : {})}
       {...filteredProps}
     >
       {children}
